@@ -25,6 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # Install Windows SDK
+      - name: Install Windows SDK
+        uses: git-for-windows/setup-git-for-windows-sdk@v1
+        with:
+          cache: true
+
       # Set up Python 3.10
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
