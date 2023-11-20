@@ -20,7 +20,7 @@ python -m nuitka ^
     --output-dir=build ^
     --company-name="ACGN-Alliance" ^
     --product-name="BlueArchive-Starter-Develop-Tools" ^
-    --windows-icon-from-ico=bas.ico ^
+    --windows-icon-from-ico=resources/bas.ico ^
     --file-version="$FILE_VERSION$" ^
     --product-version="$FILE_VERSION$" ^
     --windows-file-description="Develop Tools for BAS" ^
@@ -31,7 +31,7 @@ python -m nuitka ^
     --nofollow-import-to=multiprocessing,viztracer,numpy,cv2 ^
     --windows-disable-console ^
     --enable-plugin=pyside6 ^
-    --include-data-file=scrcpy/scrcpy-server.jar=scrcpy/scrcpy-server.jar ^
+    --include-data-file=src/app/qt_scrcpy/scrcpy-server.jar=src/app/qt_scrcpy/scrcpy-server.jar ^
     --msvc=latest ^
     --clang ^
     entry.py
@@ -159,10 +159,10 @@ def compress(version, p7zip=False):
         print(
             "========================================================================="
         )
-        # move archive to /build/release
-        os.makedirs("build\\release", exist_ok=True)
-        shutil.move(f"build\\{dist_file_name}", f"build\\release\\{dist_file_name}")
-        print("move archive to /build/release")
+    # move archive to /build/release
+    os.makedirs("build\\release", exist_ok=True)
+    shutil.move(f"build\\{dist_file_name}", f"build\\release\\{dist_file_name}")
+    print("move archive to /build/release")
 
 
 def distribute(version: str, download_upx=False, p7zip=False):
@@ -172,13 +172,13 @@ def distribute(version: str, download_upx=False, p7zip=False):
     build_main_program(version)
     upx_files(get_upx(download_upx))
     # delete build\upx
-    shutil.rmtree("build\\upx")
+    if download_upx:
+        shutil.rmtree("build\\upx")
 
     # write run_with_args.bat and copy update_log.txt
     with open("build\\run_with_args.bat", "w", encoding="utf-8") as f:
         f.write(run_with_args_bat)
-    shutil.copy("update_log.txt", "build\\update_log.txt")
-
+    shutil.copy("resources\\update_log.txt", "build\\update_log.txt")
     compress(version, p7zip=p7zip)
 
 

@@ -1,7 +1,7 @@
 [project]
-name = ""
-version = ""
-description = ""
+name = "BAS-Developer-Tools"
+version = "0.3.0"
+description = "For Bas Developers"
 authors = [
     {name = "AresConnor", email = "aresconnor867@gmail.com"},
 ]
