@@ -211,5 +211,10 @@ if __name__ == "__main__":
         help="zip with 7z",
     )
     args = parser.parse_args()
+
+    ver = args.version
+    if '/' in ver:
+        ver = ver.split('/')[-1]
+
     if args.version:
-        distribute(args.version, args.download_upx, args.p7zip, args.output)
+        distribute(ver, args.download_upx, args.p7zip, args.output)
