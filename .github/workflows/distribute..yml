@@ -27,14 +27,20 @@ jobs:
 
       # Set up Python 3.10
       - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
+
+      # init pdm
+      - name: init pdm
+        run: |
+          pipx install pdm
+          pdm install
 
       # Run the distribute script
       - name: Run the distribute script
         run: |
-          python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
+          pdm run python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
 
       # Create a release
       - name: Create a release

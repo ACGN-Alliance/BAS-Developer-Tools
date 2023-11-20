@@ -5,8 +5,6 @@ import subprocess
 import zipfile
 from io import BytesIO
 
-import urllib3
-
 from upx import upx_files
 
 run_with_args_bat = """
@@ -44,14 +42,14 @@ def get_build_script(version):
 
 
 def build_main_program(version: str):
-    print("===============================INIT PDM=================================")
-    # init pdm
-    try:
-        subprocess.run("pdm --version".split(" "))
-    except FileNotFoundError:
-        subprocess.run("pipx install pdm".split(" "))
-
-    subprocess.run("pdm sync".split(" "))
+    # print("===============================INIT PDM=================================")
+    # # init pdm
+    # try:
+    #     subprocess.run("pdm --version".split(" "))
+    # except FileNotFoundError:
+    #     subprocess.run("pipx install pdm".split(" "))
+    #
+    # subprocess.run("pdm sync".split(" "))
 
     print("===============================BUILD MAIN=================================")
     # write build script
@@ -64,6 +62,7 @@ def build_main_program(version: str):
 
 
 def get_upx(need_download_upx=False):
+    import urllib3
     if not need_download_upx:
         return "upx"
     print("===============================GET UPX=================================")
@@ -86,6 +85,7 @@ def get_upx(need_download_upx=False):
 
 
 def get_7z():
+    import urllib3
     try:
         subprocess.run("7z i")
         print(
