@@ -42,24 +42,8 @@ jobs:
         run: |
           pdm run python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
 
-      # Create a release
-      - name: Create a release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: upload release
+        uses: softprops/action-gh-release@v0.1.15
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      # Upload release assets
-      - name: Upload release assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./build/release/*
-          asset_name: BAS-Develop-Tools_OpenGL.7z
-          asset_content_type: application/x-7z-compressed
+          files: ${{ env.FIRMWARE }}/build/release/*
+          token: ${{ secrets.GITHUB_TOKEN }}

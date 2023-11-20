@@ -107,7 +107,7 @@ def get_7z():
         return "build\\7z.exe"
 
 
-def compress(output=None, p7zip=False):
+def compress(version,output=None, p7zip=False):
     if not os.path.exists("build\\Lib"):  # only for debug
         # rename build\entry.dist to build\Lib (dir)
         os.rename("build\\entry.dist", "build\\Lib")
@@ -118,7 +118,7 @@ def compress(output=None, p7zip=False):
         )
         # max 7z Lib, run_with_args.bat, update_log.txt
         p7zip_exe = get_7z()
-        dist_file_name = output or f"BAS-Develop-Tools_OpenGL.7z"
+        dist_file_name = output or f"BAS-Develop-Tools_{version}_OpenGL.7z"
         subprocess.run(
             f"{p7zip_exe} a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -mmt=on -r -y {dist_file_name} Lib run_with_args.bat update_log.txt".split(
                 " "
@@ -135,7 +135,7 @@ def compress(output=None, p7zip=False):
             "===============================COMPRESS FILES:ZIP================================="
         )
         # max zip Lib, run_with_args.bat, update_log.txt
-        dist_file_name = output or f"BAS-Develop-Tools_OpenGL.zip"
+        dist_file_name = output or f"BAS-Develop-Tools_{version}_OpenGL.zip"
         all_files = []
         for root, dirs, files in os.walk("build", topdown=False):
             for file in files:
@@ -179,12 +179,12 @@ def distribute(version: str, download_upx=False, p7zip=False, output=None):
     with open("build\\run_with_args.bat", "w", encoding="utf-8") as f:
         f.write(run_with_args_bat)
     shutil.copy("resources\\update_log.txt", "build\\update_log.txt")
-    compress(output, p7zip=p7zip)
+    compress(version,output, p7zip=p7zip)
 
 
 if __name__ == "__main__":
     """
-    usage: python scripts/distribute.py -v 0.3.0 -o BAS-Develop-Tools_OpenGL.7z --download_upx --p7zip
+    usage: python scripts/distribute.py -v 0.3.0 --download_upx --p7zip
     """
     parser = argparse.ArgumentParser()
     parser.add_argument(
