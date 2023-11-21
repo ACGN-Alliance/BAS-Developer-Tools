@@ -7,9 +7,6 @@ from PySide6.QtGui import Qt
 
 from .qyuvopenglwidget import QYUVOpenGLWidget
 
-ATTRIB_VERTEX = 3
-ATTRIB_TEXTURE = 4
-
 
 class YUVOpenGLWidget(QYUVOpenGLWidget):
     def __init__(self, parent):

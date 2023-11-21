@@ -25,12 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Install Windows SDK
-      - name: Install Windows SDK
-        uses: git-for-windows/setup-git-for-windows-sdk@v1
-        with:
-          cache: true
-
       # Set up Python 3.10
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
@@ -48,8 +42,11 @@ jobs:
         run: |
           pdm run python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
 
-      - name: upload release
-        uses: softprops/action-gh-release@v0.1.15
+      - name: Automatic Releases
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          files: ${{ env.FIRMWARE }}/build/release/*
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ github.ref }}
+          prerelease: false
+          files: |
+            build/releases/*.7z

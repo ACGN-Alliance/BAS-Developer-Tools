@@ -11,9 +11,9 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from adbutils import adb
 
 import src.scrcpy as scrcpy
-from .qt_scrcpy import QScrcpyClient
 from .frame_viewer import FrameViewer
 from .logger import Logger
+from .qt_scrcpy import QScrcpyClient
 from .ui import Ui_MainWindow
 from .utils.fps_counter import FPSCounter
 from .utils.mouse_recorder import MouseRecorder

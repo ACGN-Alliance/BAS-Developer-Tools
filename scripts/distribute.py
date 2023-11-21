@@ -14,6 +14,7 @@ start ./Lib/entry.exe --max_width 960 --max_fps 60 --bitrate 10000000
 script = """
 python -m nuitka ^
     --standalone ^
+    --assume-yes-for-downloads ^
     --lto=no ^
     --output-dir=build ^
     --company-name="ACGN-Alliance" ^
