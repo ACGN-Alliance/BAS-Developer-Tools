@@ -42,11 +42,11 @@ jobs:
         run: |
           pdm run python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
 
-      - name: Automatic Releases
+      - name: Automatic Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
           prerelease: false
           files: |
-            build/releases/*.7z
+            build/release/*.7z
