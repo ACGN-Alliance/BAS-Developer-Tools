@@ -25,16 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Get git tag
-        id: get_git_tag
-        uses: negz/get-git-tag@v1
-        with:
-          tagRegex: 'refs/tags/(.*)'
-          tagRegexGroup: 1
+      - name: Get the tag name
+        id: get_tag_name
+        run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
 
       - name: Print Version
         run: |
-          echo ${{ steps.get_git_tag.outputs.tag }}
+          echo ${{ steps.get_tag_name.outputs.TAG_NAME }}
 
       # Set up Python 3.10
       - name: Set up Python 3.10
@@ -51,13 +48,13 @@ jobs:
       # Run the distribute script
       - name: Run the distribute script
         run: |
-          pdm run python ./scripts/distribute.py -v ${{ steps.get_git_tag.outputs.tag }} --download_upx --p7zip
+          pdm run python ./scripts/distribute.py -v ${{ steps.get_tag_name.outputs.TAG_NAME }} --download_upx --p7zip
 
       - name: Automatic Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ steps.get_git_tag.outputs.tag }}
+          automatic_release_tag: ${{ steps.get_tag_name.outputs.TAG_NAME }}
           prerelease: false
           files: |
             build/release/*.7z
