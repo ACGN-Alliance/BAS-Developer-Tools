@@ -8,7 +8,7 @@ on:
   push:
     # Only run this workflow when a tag is pushed
     tags:
-      - '*'
+      - 'v*.*.*'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,6 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Set env
+        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
+
+      - name: Print Version
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+
       # Set up Python 3.10
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
@@ -40,13 +48,13 @@ jobs:
       # Run the distribute script
       - name: Run the distribute script
         run: |
-          pdm run python ./scripts/distribute.py -v ${{ github.ref }} --download_upx --p7zip
+          pdm run python ./scripts/distribute.py -v ${{ env.RELEASE_VERSION }} --download_upx --p7zip
 
       - name: Automatic Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ github.ref }}
+          automatic_release_tag: ${{ env.RELEASE_VERSION }}
           prerelease: false
           files: |
             build/release/*.7z
