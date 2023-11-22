@@ -28,6 +28,7 @@ jobs:
       - name: Get the tag name
         id: get_tag_name
         run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
+        shell: bash
 
       - name: Print Version
         run: |
