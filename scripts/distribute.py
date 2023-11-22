@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 import zipfile
+import re
 from io import BytesIO
 
 from upx import upx_files
@@ -38,6 +39,8 @@ python -m nuitka ^
 
 
 def get_build_script(version):
+    # 提取版本号 x.x.x
+    version = re.findall(r"\d+\.\d+\.\d+", version)[0]
     _script = script.replace("$FILE_VERSION$", version)
     return _script
 
