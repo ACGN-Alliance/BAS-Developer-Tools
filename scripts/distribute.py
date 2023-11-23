@@ -16,7 +16,7 @@ script = """
 python -m nuitka ^
     --standalone ^
     --assume-yes-for-downloads ^
-    --lto=no ^
+    --lto=yes ^
     --output-dir=build ^
     --company-name="ACGN-Alliance" ^
     --product-name="BlueArchive-Starter-Develop-Tools" ^
@@ -46,15 +46,6 @@ def get_build_script(version):
 
 
 def build_main_program(version: str):
-    # print("===============================INIT PDM=================================")
-    # # init pdm
-    # try:
-    #     subprocess.run("pdm --version".split(" "))
-    # except FileNotFoundError:
-    #     subprocess.run("pipx install pdm".split(" "))
-    #
-    # subprocess.run("pdm sync".split(" "))
-
     print("===============================BUILD MAIN=================================")
     # write build script
     with open("_nuitka_build.bat", "w", encoding="utf-8") as f:
