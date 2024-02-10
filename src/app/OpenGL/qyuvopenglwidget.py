@@ -75,7 +75,7 @@ void main(void)
     
     yuv.x = texture2D(tex_y, textureOut).r;
     // 降低一些亮度
-    yuv.x = yuv.x - 0.0625; 
+    // yuv.x = yuv.x - 0.0313; 
     
     yuv.y = texture2D(tex_u, textureOut).r - 0.5;
     yuv.z = texture2D(tex_v, textureOut).r - 0.5;
@@ -104,7 +104,6 @@ class QYUVOpenGLWidget(QOpenGLWidget):
         self.m_pTextureY = None
         self.m_pTextureU = None
         self.m_pTextureV = None
-        self.m_pYuvFile = None
         self.m_nVideoH = 0
         self.m_nVideoW = 0
 
@@ -194,6 +193,14 @@ class QYUVOpenGLWidget(QOpenGLWidget):
         self.id_v = self.m_pTextureV.textureId()
 
         glClearColor(0.0, 0.0, 0.0, 1.0)  # black
+
+    def hideEvent(self, event):
+        self.m_pShaderProgram.removeAllShaders()
+        self.m_pShaderProgram.release()
+        self.m_pTextureY.destroy()
+        self.m_pTextureU.destroy()
+        self.m_pTextureV.destroy()
+        QOpenGLWidget.hideEvent(self, event)
 
     def setFrame(self, pBufYuv420p: av.video.frame.VideoFrame):
         """

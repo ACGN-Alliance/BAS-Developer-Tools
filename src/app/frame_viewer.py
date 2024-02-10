@@ -237,7 +237,7 @@ class FrameViewer(QWidget):
             self.counter += 1
         os.makedirs("regions", exist_ok=True)
         pixmap.save(f"regions/{region_name}.png")
-        with open(f"regions/regions.txt", "a") as f:
+        with open("regions/regions.txt", "a") as f:
             data = json.dumps(
                 {
                     "name": region_name,

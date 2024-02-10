@@ -23,7 +23,7 @@ class ColorConsole:
             + f"[{level.upper()}".ljust(8)
             + f"] {sender}".ljust(16)
             + f"::{msg}"
-        )
+        ).ljust(250)
         cls.old_print(f"{color}{console_msg}\033[0m", *args, **kwargs)
 
     @classmethod

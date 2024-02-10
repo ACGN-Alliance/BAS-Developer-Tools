@@ -17,7 +17,7 @@ from src.scrcpy.control import ControlSender
 
 try:
     from PySide6.QtNetwork import QTcpSocket
-    from PySide6.QtCore import QObject, QByteArray, Signal, QThread, SignalInstance, Qt
+    from PySide6.QtCore import QObject, QByteArray, Signal, QThread
 except ImportError:
     raise ImportError("PySide6 is required to use QScrcpyClient")
 

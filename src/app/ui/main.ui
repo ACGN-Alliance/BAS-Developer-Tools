@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>883</width>
-    <height>639</height>
+    <width>1021</width>
+    <height>646</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,7 +76,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QOpenGLWidget" name="openGLWidget">
+            <widget class="QOpenGLWidget" name="opengl_widget">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -389,6 +389,19 @@
          </property>
          <property name="text">
           <string>Show Log</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_record_script">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Record Script</string>
          </property>
         </widget>
        </item>

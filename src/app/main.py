@@ -11,6 +11,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from adbutils import adb
 
 import src.scrcpy as scrcpy
+from .connector import Connector
 from .frame_viewer import FrameViewer
 from .logger import Logger
 from .qt_scrcpy import QScrcpyClient
@@ -406,6 +407,9 @@ def main():
     else:
         app = QApplication([])
     app.setApplicationName("PyScrcpyClient")
+
+    Connector.try_connect()
+
     try:
         m = MainWindow(
             args.max_width, serial, args.encoder_name, args.max_fps, args.bitrate

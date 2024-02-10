@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:0e506ac92859436b5e6035ce02c2e0b98fd5702064d201b4bdfbe6df7fd232bb"
+content_hash = "sha256:88034a1071aee27c1832d74d4480c972980796d70b586ca431300edc5022b997"
 
 [[package]]
 name = "adbutils"
@@ -253,6 +253,15 @@ summary = "Library for analyzing ELF files and DWARF debugging information"
 files = [
     {file = "pyelftools-0.30-py2.py3-none-any.whl", hash = "sha256:544c3440eddb9a0dce70b6611de0b28163d71def759d2ed57a0d00118fc5da86"},
     {file = "pyelftools-0.30.tar.gz", hash = "sha256:2fc92b0d534f8b081f58c7c370967379123d8e00984deb53c209364efd575b40"},
+]
+
+[[package]]
+name = "pyglet"
+version = "2.0.10"
+summary = "Cross-platform windowing and multimedia library"
+files = [
+    {file = "pyglet-2.0.10-py3-none-any.whl", hash = "sha256:e10a1f1a6a2dcfbf23155913746ff6fbf8ea18c5ee813b6d0e79d273bb2b3c18"},
+    {file = "pyglet-2.0.10.zip", hash = "sha256:242beb1b3bd67c5bebdfe5ba11ec56b696ad86b50c6e7f2a317f8d783256b9c9"},
 ]
 
 [[package]]
